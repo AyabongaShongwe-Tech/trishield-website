@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trishield Analytics & Security</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== OPENING ANIMATION OVERLAY ===== -->
+  <div id="intro-overlay">
+    <canvas id="intro-canvas"></canvas>
+
+    <!-- Scan line effect -->
+    <div class="intro-scan"></div>
+
+    <!-- Corner brackets -->
+    <div class="intro-corner tl"></div>
+    <div class="intro-corner tr"></div>
+    <div class="intro-corner bl"></div>
+    <div class="intro-corner br"></div>
+
+    <!-- Center content -->
+    <div id="intro-center">
+      <!-- Rings -->
+      <div class="intro-ring r1"></div>
+      <div class="intro-ring r2"></div>
+      <div class="intro-ring r3"></div>
+
+      <!-- Logo mark -->
+      <div id="intro-mark">
+        <svg viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ig1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#3ab0e2"/>
+              <stop offset="100%" stop-color="#1e6fa8"/>
+            </linearGradient>
+            <filter id="iglow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- Shield outline -->
+          <path id="ip-shield" d="M60 6 L108 27 L108 72 C108 102 60 132 60 132 C60 132 12 102 12 72 L12 27 Z"
+            fill="none" stroke="url(#ig1)" stroke-width="2" filter="url(#iglow)"
+            stroke-dasharray="320" stroke-dashoffset="320"/>
+          <!-- Inner glow fill -->
+          <path id="ip-fill" d="M60 14 L100 32 L100 72 C100 98 60 124 60 124 C60 124 20 98 20 72 L20 32 Z"
+            fill="rgba(58,176,226,0.04)" stroke="rgba(58,176,226,0.15)" stroke-width="1" opacity="0"/>
+          <!-- T letter -->
+          <text id="ip-t" x="60" y="86" text-anchor="middle"
+            font-family="Bebas Neue, sans-serif" font-size="52"
+            fill="url(#ig1)" filter="url(#iglow)" opacity="0">T</text>
+          <!-- Horizontal lines -->
+          <line id="ip-l1" x1="28" y1="50" x2="92" y2="50" stroke="rgba(58,176,226,0.5)" stroke-width="0.8"
+            stroke-dasharray="64" stroke-dashoffset="64"/>
+          <line id="ip-l2" x1="28" y1="100" x2="92" y2="100" stroke="rgba(58,176,226,0.5)" stroke-width="0.8"
+            stroke-dasharray="64" stroke-dashoffset="64"/>
+          <!-- Node dots -->
+          <circle cx="12" cy="27" r="2.5" fill="#3ab0e2" opacity="0" id="ip-d1"/>
+          <circle cx="108" cy="27" r="2.5" fill="#3ab0e2" opacity="0" id="ip-d2"/>
+          <circle cx="60" cy="6" r="2.5" fill="#3ab0e2" opacity="0" id="ip-d3"/>
+          <circle cx="12" cy="72" r="2" fill="#1e6fa8" opacity="0" id="ip-d4"/>
+          <circle cx="108" cy="72" r="2" fill="#1e6fa8" opacity="0" id="ip-d5"/>
+          <circle cx="60" cy="132" r="2.5" fill="#3ab0e2" opacity="0" id="ip-d6"/>
+        </svg>
+      </div>
+
+      <!-- Text block -->
+      <div id="intro-words">
+        <div id="intro-word-tri">
+          <span>T</span><span>R</span><span>I</span>
+        </div>
+        <div id="intro-word-shield">
+          <span>S</span><span>H</span><span>I</span><span>E</span><span>L</span><span>D</span>
+        </div>
+        <div id="intro-divider-line"></div>
+        <div id="intro-sub-text">ANALYTICS & SECURITY</div>
+        <div id="intro-tagline-dots">
+          <span></span><span>INTELLIGENCE</span>
+          <span></span><span>DATA</span>
+          <span></span><span>SECURITY</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading bar -->
+    <div id="intro-loader">
+      <div id="intro-loader-track">
+        <div id="intro-loader-fill"></div>
+      </div>
+      <div id="intro-loader-text">INITIALISING SYSTEMS</div>
+    </div>
+  </div>
+
+  <!-- ===== CURSOR ===== -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ===== SCROLL PROGRESS ===== -->
+  <div id="scroll-progress"></div>
+
+  <!-- ===== THREE.JS HERO CANVAS ===== -->
+  <canvas id="hero-canvas"></canvas>
+
+  <!-- ===== BACKGROUND PARTICLES CANVAS ===== -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- ===== NAV ===== -->
+  <nav id="mainNav">
+    <div class="nav-logo">
+      <img id="navLogoImg" src="" alt="Trishield Analytics & Security">
+    </div>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#mission">About</a></li>
+      <li><a href="#market">Markets</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="openModal('contact-modal')">Get a Quote</button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== MOBILE MENU ===== -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services"  onclick="closeMobileMenu()">Services</a>
+    <a href="#mission"   onclick="closeMobileMenu()">About</a>
+    <a href="#market"    onclick="closeMobileMenu()">Markets</a>
+    <a href="#team"      onclick="closeMobileMenu()">Team</a>
+    <a href="#contact"   onclick="closeMobileMenu()">Contact</a>
+    <button class="btn-primary" onclick="closeMobileMenu();openModal('contact-modal')">Get a Quote</button>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg-glow"></div>
+    <p class="hero-eyebrow">Intelligence · Data · Security</p>
+    <h1 class="hero-title">TRISHIELD<br><span class="accent">ANALYTICS</span><br>& SECURITY</h1>
+    <p class="hero-sub">Three disciplines. One vision. Integrated AI engineering, data science, and cybersecurity solutions that transform how organisations protect and leverage their digital assets.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="openModal('contact-modal')">Request a Consultation</button>
+      <button class="btn-outline" onclick="openModal('quote-modal')">Get a Free Quote</button>
+      <a href="#services" class="btn-gold">Explore Services</a>
+    </div>
+    <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+  </section>
+
+  <!-- ===== METRICS ===== -->
+  <div class="metrics">
+    <div class="metric-item reveal"><span class="metric-num" data-target="3">0</span><span class="metric-label">Core Disciplines</span></div>
+    <div class="metric-item reveal delay-1"><span class="metric-num" data-target="100">0</span><span class="metric-label">% Data Confidential</span></div>
+    <div class="metric-item reveal delay-2"><span class="metric-num" data-target="6">0</span><span class="metric-label">Target Market Sectors</span></div>
+    <div class="metric-item reveal delay-3"><span class="metric-num" data-target="24">0</span><span class="metric-label">Hours Support Coverage</span></div>
+  </div>
+
+  <!-- ===== SERVICES ===== -->
+  <section class="services" id="services">
+    <div class="services-header reveal">
+      <div>
+        <span class="section-label">What We Do</span>
+        <h2 class="section-title">OUR CORE<br>CAPABILITIES</h2>
+      </div>
+      <p class="section-body" style="max-width:370px">Three powerful disciplines engineered to work together — delivering intelligence, insight, and protection in one integrated offering.</p>
+    </div>
+    <div class="services-grid">
+      <!-- Card 1 -->
+      <div class="service-card reveal" data-tilt>
+        <span class="svc-num">01</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.5 2A7.5 7.5 0 0 1 17 9.5c0 4.14-3.36 7.5-7.5 7.5S2 13.64 2 9.5 5.36 2 9.5 2z"/><path d="M15 15l5 5"/><circle cx="17" cy="7" r="2" stroke-dasharray="2"/></svg>
+        </div>
+        <h3 class="svc-name">AI Engineering</h3>
+        <p class="svc-desc">End-to-end machine learning solutions that automate processes, generate predictions, and unlock intelligence from your data at scale.</p>
+        <ul class="svc-list">
+          <li>ML model development & deployment</li>
+          <li>Natural language processing (NLP)</li>
+          <li>AI-powered automation tools</li>
+          <li>Predictive analytics systems</li>
+        </ul>
+        <button class="svc-cta" onclick="openModal('quote-modal')">Enquire About AI →</button>
+      </div>
+      <!-- Card 2 -->
+      <div class="service-card reveal delay-2" data-tilt>
+        <span class="svc-num">02</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v4c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 9v4c0 1.66 4 3 9 3s9-1.34 9-3V9"/><path d="M3 13v4c0 1.66 4 3 9 3s9-1.34 9-3v-4"/></svg>
+        </div>
+        <h3 class="svc-name">Data Engineering</h3>
+        <p class="svc-desc">Architect, build and manage the data infrastructure that powers modern business — from raw ingestion to actionable intelligence.</p>
+        <ul class="svc-list">
+          <li>Data pipeline design & implementation</li>
+          <li>Data warehousing & architecture</li>
+          <li>BI dashboards & advanced analytics</li>
+          <li>Big data processing solutions</li>
+        </ul>
+        <button class="svc-cta" onclick="openModal('quote-modal')">Enquire About Data →</button>
+      </div>
+      <!-- Card 3 -->
+      <div class="service-card reveal delay-4" data-tilt>
+        <span class="svc-num">03</span>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </div>
+        <h3 class="svc-name">Cybersecurity</h3>
+        <p class="svc-desc">Defend digital assets with enterprise-grade security architecture, proactive threat monitoring, and full regulatory compliance.</p>
+        <ul class="svc-list">
+          <li>Vulnerability assessments & pen testing</li>
+          <li>Security architecture design</li>
+          <li>Managed security monitoring & IR</li>
+          <li>POPIA & GDPR compliance frameworks</li>
+        </ul>
+        <button class="svc-cta" onclick="openModal('quote-modal')">Enquire About Security →</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 3D FLIP CARDS ===== -->
+  <section class="flip-section">
+    <div class="flip-grid">
+      <div class="flip-card-wrap reveal">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-icon">🤖</div>
+            <div class="flip-title">AI Engineering</div>
+            <p style="font-size:.76rem;color:var(--steel);margin-top:10px;text-align:center">Hover to see what's included</p>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-title">What We Deliver</div>
+            <ul>
+              <li>Custom ML model development</li>
+              <li>NLP & chatbot integration</li>
+              <li>Predictive analytics systems</li>
+              <li>Generative AI workflows</li>
+              <li>Model monitoring & retraining</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card-wrap reveal delay-2">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-icon">📊</div>
+            <div class="flip-title">Data Engineering</div>
+            <p style="font-size:.76rem;color:var(--steel);margin-top:10px;text-align:center">Hover to see what's included</p>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-title">What We Deliver</div>
+            <ul>
+              <li>ETL/ELT pipeline design</li>
+              <li>Data warehouse architecture</li>
+              <li>Power BI & Tableau dashboards</li>
+              <li>Real-time streaming (Kafka)</li>
+              <li>Data quality & governance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="flip-card-wrap reveal delay-4">
+        <div class="flip-card-inner">
+          <div class="flip-front">
+            <div class="flip-icon">🔐</div>
+            <div class="flip-title">Cybersecurity</div>
+            <p style="font-size:.76rem;color:var(--steel);margin-top:10px;text-align:center">Hover to see what's included</p>
+          </div>
+          <div class="flip-back">
+            <div class="flip-back-title">What We Deliver</div>
+            <ul>
+              <li>Penetration testing & audits</li>
+              <li>POPIA compliance frameworks</li>
+              <li>24/7 managed SOC monitoring</li>
+              <li>Cloud security architecture</li>
+              <li>Incident response planning</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <section class="globe-section" id="globe-sec">
+    <div class="globe-text reveal">
+      <span class="section-label">Our Reach</span>
+      <h2 class="section-title">AFRICA &<br>BEYOND</h2>
+      <p class="section-body" style="margin-top:20px">Serving clients across South Africa and expanding into global markets — delivering world-class technology solutions with an Africa-native perspective.</p>
+      <div class="globe-pins-legend">
+        <div class="pin-item"><span class="pin-dot" style="background:#3ab0e2"></span>South Africa (HQ)</div>
+        <div class="pin-item"><span class="pin-dot" style="background:#c8a84b"></span>Kenya</div>
+        <div class="pin-item"><span class="pin-dot" style="background:#3ae2a0"></span>Nigeria</div>
+        <div class="pin-item"><span class="pin-dot" style="background:#e05050"></span>United Kingdom</div>
+      </div>
+    </div>
+    <div class="globe-canvas-wrap reveal delay-3">
+      <canvas id="globe-canvas"></canvas>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== MISSION ===== -->
+  <section class="mission" id="mission">
+    <div class="mission-visual reveal">
+      <div class="logo-frame">
+        <div class="orbit o1"><div class="orbit-dot"></div></div>
+        <div class="orbit o2"><div class="orbit-dot"></div></div>
+        <div class="orbit o3"><div class="orbit-dot"></div></div>
+        <img id="missionLogoImg" src="" alt="Trishield">
+      </div>
+    </div>
+    <div class="reveal delay-2">
+      <span class="section-label">Who We Are</span>
+      <h2 class="section-title">BUILT TO<br>PROTECT &<br>EMPOWER</h2>
+      <p class="section-body" style="margin-top:20px">Trishield Analytics and Security is a technology services company delivering advanced solutions across AI engineering, data science, and cybersecurity. We help organisations harness data, automate processes, and safeguard digital assets in an increasingly complex landscape.</p>
+      <div class="mission-vision">
+        <span class="vision-label">Our Vision</span>
+        <p class="vision-text">"To become a trusted leader in intelligent analytics and cybersecurity solutions across Africa and beyond — delivering innovation that is secure, scalable, and transformational."</p>
+      </div>
+      <div style="margin-top:28px"><button class="btn-primary" onclick="openModal('partnership-modal')">Explore Partnership</button></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== MARKET ===== -->
+  <section class="market" id="market">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto">
+      <span class="section-label">Who We Serve</span>
+      <h2 class="section-title">TARGET MARKETS</h2>
+    </div>
+    <div class="market-grid">
+      <div class="market-card reveal"><div class="mkt-icon">🏢</div><h3 class="mkt-name">SMEs & Corporations</h3><p class="mkt-desc">Scalable solutions tailored to small-medium enterprises and large corporate structures seeking competitive digital advantage.</p></div>
+      <div class="market-card reveal delay-1"><div class="mkt-icon">🏦</div><h3 class="mkt-name">Financial Institutions</h3><p class="mkt-desc">Regulatory-compliant analytics, fraud detection, and risk management systems built for the demands of financial services.</p></div>
+      <div class="market-card reveal delay-2"><div class="mkt-icon">🏥</div><h3 class="mkt-name">Healthcare Providers</h3><p class="mkt-desc">Secure health data management and AI-driven clinical analytics that improve outcomes while maintaining patient privacy.</p></div>
+      <div class="market-card reveal delay-3"><div class="mkt-icon">🏛️</div><h3 class="mkt-name">Government Agencies</h3><p class="mkt-desc">Mission-critical data infrastructure and cybersecurity frameworks designed for public sector operational requirements.</p></div>
+      <div class="market-card reveal delay-4"><div class="mkt-icon">🚀</div><h3 class="mkt-name">Tech Startups</h3><p class="mkt-desc">Agile data and AI solutions that help high-growth startups build robust digital foundations from day one.</p></div>
+      <div class="market-card reveal delay-5"><div class="mkt-icon">🌍</div><h3 class="mkt-name">Pan-African Expansion</h3><p class="mkt-desc">Pan-African and international market strategy — bringing world-class technology solutions to underserved markets.</p></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== REVENUE ===== -->
+  <section class="revenue">
+    <div class="revenue-inner">
+      <div class="reveal">
+        <span class="section-label">Business Model</span>
+        <h2 class="section-title">REVENUE<br>STREAMS</h2>
+        <div style="margin-top:32px">
+          <div class="stream-item"><div class="stream-dot" style="background:#3ab0e2"></div><div><div class="stream-name">Project-Based Contracts</div><div class="stream-desc">Custom-scoped engagements with defined deliverables and milestones.</div></div></div>
+          <div class="stream-item"><div class="stream-dot" style="background:#c8a84b"></div><div><div class="stream-name">Monthly Retainers</div><div class="stream-desc">Managed services agreements for ongoing security monitoring and data operations.</div></div></div>
+          <div class="stream-item"><div class="stream-dot" style="background:#6b8fa8"></div><div><div class="stream-name">Consulting Fees</div><div class="stream-desc">Strategic advisory on AI adoption, data architecture, and cybersecurity posture.</div></div></div>
+          <div class="stream-item"><div class="stream-dot" style="background:#9fb8cc"></div><div><div class="stream-name">Proprietary Tools (Phase 2)</div><div class="stream-desc">Licensing of internally developed AI and security tooling to partners.</div></div></div>
+        </div>
+      </div>
+      <div class="reveal delay-3">
+        <span class="section-label">Revenue Mix (Projected)</span>
+        <div class="rev-bars" id="revBars">
+          <div class="rev-bar-wrap"><div class="rev-bar-label"><span class="rev-bar-name">Project Contracts</span><span class="rev-bar-pct">40%</span></div><div class="rev-bar-track"><div class="rev-bar-fill" data-width="40"></div></div></div>
+          <div class="rev-bar-wrap"><div class="rev-bar-label"><span class="rev-bar-name">Managed Retainers</span><span class="rev-bar-pct">35%</span></div><div class="rev-bar-track"><div class="rev-bar-fill" data-width="35"></div></div></div>
+          <div class="rev-bar-wrap"><div class="rev-bar-label"><span class="rev-bar-name">Consulting</span><span class="rev-bar-pct">18%</span></div><div class="rev-bar-track"><div class="rev-bar-fill" data-width="18"></div></div></div>
+          <div class="rev-bar-wrap"><div class="rev-bar-label"><span class="rev-bar-name">Licensing</span><span class="rev-bar-pct">7%</span></div><div class="rev-bar-track"><div class="rev-bar-fill" data-width="7"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TECH STACK ===== -->
+  <div class="tech reveal">
+    <div class="tech-inner">
+      <span class="tech-label">Technology Stack</span>
+      <div class="tech-line"></div>
+      <div class="tech-tags">
+        <span class="tech-tag">AWS</span><span class="tech-tag">Azure</span><span class="tech-tag">GCP</span>
+        <span class="tech-tag">TensorFlow</span><span class="tech-tag">PyTorch</span><span class="tech-tag">Apache Spark</span>
+        <span class="tech-tag">Kafka</span><span class="tech-tag">PostgreSQL</span><span class="tech-tag">MongoDB</span>
+        <span class="tech-tag">SIEM</span><span class="tech-tag">Python</span><span class="tech-tag">Kubernetes</span>
+        <span class="tech-tag">Docker</span><span class="tech-tag">Tableau</span><span class="tech-tag">Power BI</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===== STATS 3D SECTION ===== -->
+  <section class="stats3d-section">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 60px">
+      <span class="section-label">By The Numbers</span>
+      <h2 class="section-title">WHY TRISHIELD</h2>
+    </div>
+    <div class="stats3d-grid">
+      <div class="stat3d-card reveal" style="--i:0">
+        <div class="stat3d-num" data-count="99.9">0</div>
+        <div class="stat3d-unit">%</div>
+        <div class="stat3d-label">Uptime SLA</div>
+      </div>
+      <div class="stat3d-card reveal delay-1" style="--i:1">
+        <div class="stat3d-num" data-count="100">0</div>
+        <div class="stat3d-unit">%</div>
+        <div class="stat3d-label">POPIA Compliant</div>
+      </div>
+      <div class="stat3d-card reveal delay-2" style="--i:2">
+        <div class="stat3d-num" data-count="24">0</div>
+        <div class="stat3d-unit">/7</div>
+        <div class="stat3d-label">Monitoring</div>
+      </div>
+      <div class="stat3d-card reveal delay-3" style="--i:3">
+        <div class="stat3d-num" data-count="50">0</div>
+        <div class="stat3d-unit">+</div>
+        <div class="stat3d-label">Projects Delivered</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== TEAM ===== -->
+  <section class="team" id="team">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto">
+      <span class="section-label">The People</span>
+      <h2 class="section-title">TEAM STRUCTURE</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal"><div class="team-avatar"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="team-role">Leadership</div><div class="team-title">CEO / Founder</div></div>
+      <div class="team-card reveal delay-1"><div class="team-avatar"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 20v-2a5 5 0 0 1 5-5h1"/><path d="M16 11l2 2 4-4"/></svg></div><div class="team-role">Engineering</div><div class="team-title">AI Engineers</div></div>
+      <div class="team-card reveal delay-2"><div class="team-avatar"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div class="team-role">Data</div><div class="team-title">Data Engineers & Scientists</div></div>
+      <div class="team-card reveal delay-3"><div class="team-avatar"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="team-role">Security</div><div class="team-title">Cybersecurity Analysts</div></div>
+      <div class="team-card reveal delay-4"><div class="team-avatar"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div class="team-role">Growth</div><div class="team-title">Sales & Marketing</div></div>
+      <div class="team-card reveal delay-5"><div class="team-avatar"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 12h8M12 8v8"/></svg></div><div class="team-role">Operations</div><div class="team-title">Project Manager</div></div>
+    </div>
+    <div style="text-align:center;margin-top:52px"><button class="btn-outline" onclick="openModal('careers-modal')">View Open Positions</button></div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== RISK ===== -->
+  <section class="risk">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto">
+      <span class="section-label">Risk Management</span>
+      <h2 class="section-title">RISKS &<br>MITIGATIONS</h2>
+    </div>
+    <div class="risk-grid">
+      <div class="reveal delay-1">
+        <span class="risk-col-lbl">⚠ Key Risks</span>
+        <div class="risk-item"><div class="risk-dot" style="background:#e05050"></div><div class="risk-text">High competition in technology services sector</div></div>
+        <div class="risk-item"><div class="risk-dot" style="background:#e05050"></div><div class="risk-text">Rapid technological change and obsolescence</div></div>
+        <div class="risk-item"><div class="risk-dot" style="background:#e08050"></div><div class="risk-text">Cybersecurity liability exposure and breaches</div></div>
+        <div class="risk-item"><div class="risk-dot" style="background:#e08050"></div><div class="risk-text">Talent acquisition and retention challenges</div></div>
+      </div>
+      <div class="reveal delay-3">
+        <span class="risk-col-lbl">✓ Mitigations</span>
+        <div class="risk-item"><div class="risk-dot" style="background:#3ab0e2"></div><div class="risk-text">Integrated service offering differentiates Trishield in the market</div></div>
+        <div class="risk-item"><div class="risk-dot" style="background:#3ab0e2"></div><div class="risk-text">Continuous R&D investment and team upskilling culture</div></div>
+        <div class="risk-item"><div class="risk-dot" style="background:#c8a84b"></div><div class="risk-text">Robust legal, compliance and insurance frameworks</div></div>
+        <div class="risk-item"><div class="risk-dot" style="background:#c8a84b"></div><div class="risk-text">Competitive compensation and equity-linked retention programs</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== 3D PROCESS TIMELINE ===== -->
+  <section class="process-section">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 60px">
+      <span class="section-label">How We Work</span>
+      <h2 class="section-title">OUR PROCESS</h2>
+    </div>
+    <div class="process-timeline">
+      <div class="process-line"></div>
+      <div class="process-step reveal" style="--i:0">
+        <div class="process-dot">01</div>
+        <div class="process-card">
+          <h3 class="process-title">Discovery</h3>
+          <p class="process-desc">Deep-dive into your environment, challenges, and goals. Free scoping session included.</p>
+        </div>
+      </div>
+      <div class="process-step reveal delay-1" style="--i:1">
+        <div class="process-dot">02</div>
+        <div class="process-card">
+          <h3 class="process-title">Architecture</h3>
+          <p class="process-desc">Design secure-by-default solutions tailored to your infrastructure and compliance needs.</p>
+        </div>
+      </div>
+      <div class="process-step reveal delay-2" style="--i:2">
+        <div class="process-dot">03</div>
+        <div class="process-card">
+          <h3 class="process-title">Development</h3>
+          <p class="process-desc">Agile build cycles with regular checkpoints. You see progress every step of the way.</p>
+        </div>
+      </div>
+      <div class="process-step reveal delay-3" style="--i:3">
+        <div class="process-dot">04</div>
+        <div class="process-card">
+          <h3 class="process-title">Security Testing</h3>
+          <p class="process-desc">Rigorous penetration testing, vulnerability scanning, and compliance validation.</p>
+        </div>
+      </div>
+      <div class="process-step reveal delay-4" style="--i:4">
+        <div class="process-dot">05</div>
+        <div class="process-card">
+          <h3 class="process-title">Deployment</h3>
+          <p class="process-desc">Smooth go-live with full handover, documentation, and ongoing support options.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta-section" id="contact">
+    <div class="cta-glow"></div>
+    <div class="reveal">
+      <h2 class="cta-title">READY TO<br><span>TRANSFORM</span><br>YOUR FUTURE?</h2>
+      <p class="cta-sub">Partner with Trishield to unlock the full potential of your data — while keeping your organisation secure, compliant, and competitive.</p>
+      <div class="cta-actions">
+        <button class="btn-primary" onclick="openModal('contact-modal')">Send Us a Message</button>
+        <button class="btn-outline" onclick="openModal('quote-modal')">Request a Free Quote</button>
+        <button class="btn-gold" onclick="openModal('partnership-modal')">Become a Partner</button>
+      </div>
+      <div class="contact-cards">
+        <div class="contact-card reveal" onclick="openModal('contact-modal')"><div class="contact-icon">📧</div><div class="contact-type">Email Us</div><div class="contact-value">info@trishield.co.za</div><div class="contact-action">Send message →</div></div>
+        <div class="contact-card reveal delay-1" onclick="openModal('quote-modal')"><div class="contact-icon">📋</div><div class="contact-type">Get a Quote</div><div class="contact-value">Free project scoping & proposal</div><div class="contact-action">Start here →</div></div>
+        <div class="contact-card reveal delay-2" onclick="openModal('careers-modal')"><div class="contact-icon">💼</div><div class="contact-type">Careers</div><div class="contact-value">Join the Trishield team</div><div class="contact-action">View positions →</div></div>
+        <div class="contact-card reveal delay-3" onclick="openModal('partnership-modal')"><div class="contact-icon">🤝</div><div class="contact-type">Partnership</div><div class="contact-value">Strategic alliance enquiries</div><div class="contact-action">Let's collaborate →</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <div class="newsletter reveal">
+    <div class="newsletter-text">
+      <span class="nl-label">Stay Informed</span>
+      <h3>INDUSTRY INSIGHTS<br>& SECURITY ALERTS</h3>
+      <p>Subscribe for monthly reports on AI trends, data governance updates, and cybersecurity threat intelligence across Africa.</p>
+    </div>
+    <div>
+      <div class="nl-form">
+        <input type="email" class="nl-input" id="nlEmail" placeholder="your@email.com">
+        <button class="btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+      </div>
+      <p class="nl-note">No spam. Unsubscribe anytime. Your data is handled per our Privacy Policy.</p>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <img id="footerLogoImg" src="" alt="Trishield">
+        <p class="footer-desc">Trishield Analytics and Security delivers integrated AI engineering, data science, and cybersecurity solutions that empower organisations across Africa and beyond.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services">AI Engineering</a></li>
+          <li><a href="#services">Data Engineering</a></li>
+          <li><a href="#services">Cybersecurity</a></li>
+          <li><a href="#" onclick="openModal('quote-modal')">Get a Quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#mission">About Us</a></li>
+          <li><a href="#team">Our Team</a></li>
+          <li><a href="#" onclick="openModal('careers-modal')">Careers</a></li>
+          <li><a href="#" onclick="openModal('partnership-modal')">Partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Connect</div>
+        <ul class="footer-links">
+          <li><a href="#" onclick="openModal('contact-modal')">Contact Us</a></li>
+          <li><a href="mailto:info@trishield.co.za">info@trishield.co.za</a></li>
+          <li><a href="mailto:partners@trishield.co.za">partners@trishield.co.za</a></li>
+          <li><a href="mailto:careers@trishield.co.za">careers@trishield.co.za</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Trishield Analytics and Security. All rights reserved.</span>
+      <div class="footer-socials">
+        <div class="footer-social" title="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+        <div class="footer-social" title="Twitter/X"><svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></div>
+        <div class="footer-social" title="GitHub"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+      </div>
+      <span class="footer-tag">Intelligence · Data · Security</span>
+    </div>
+  </footer>
+
+  <!-- ===== MODALS ===== -->
+  <!-- CONTACT MODAL -->
+  <div class="modal-overlay" id="contact-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('contact-modal')">✕</button>
+      <span class="modal-eyebrow">Get In Touch</span>
+      <h2 class="modal-title">SEND US A MESSAGE</h2>
+      <p class="modal-subtitle">Our team responds within 24 hours on business days.</p>
+      <div id="contact-form-wrap">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">First Name <span class="required">*</span></label><input type="text" class="form-input" id="c-fname" placeholder="John"></div>
+          <div class="form-group"><label class="form-label">Last Name <span class="required">*</span></label><input type="text" class="form-input" id="c-lname" placeholder="Smith"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email Address <span class="required">*</span></label><input type="email" class="form-input" id="c-email" placeholder="john@company.com"></div>
+        <div class="form-group"><label class="form-label">Phone Number</label><input type="tel" class="form-input" id="c-phone" placeholder="+27 XX XXX XXXX"></div>
+        <div class="form-group"><label class="form-label">Organisation</label><input type="text" class="form-input" id="c-org" placeholder="Your company name"></div>
+        <div class="form-group"><label class="form-label">Subject <span class="required">*</span></label>
+          <select class="form-select" id="c-subject">
+            <option value="">Select a subject...</option>
+            <option>General Enquiry</option><option>AI Engineering Services</option><option>Data Engineering Services</option><option>Cybersecurity Services</option><option>Partnership Opportunity</option><option>Pricing & Packages</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Message <span class="required">*</span></label><textarea class="form-textarea" id="c-message" placeholder="Tell us about your needs..."></textarea></div>
+        <div class="form-check"><input type="checkbox" id="c-privacy"><label class="form-check-label" for="c-privacy">I agree to the <a href="#">Privacy Policy</a> and consent to Trishield storing my contact information.</label></div>
+        <button class="btn-primary form-submit" onclick="submitForm('contact')">Send Message</button>
+      </div>
+      <div class="form-success" id="contact-success"><div class="success-icon">✅</div><h3>MESSAGE SENT!</h3><p>We'll respond within 24 business hours.</p></div>
+    </div>
+  </div>
+
+  <!-- QUOTE MODAL -->
+  <div class="modal-overlay" id="quote-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('quote-modal')">✕</button>
+      <span class="modal-eyebrow">Free Consultation</span>
+      <h2 class="modal-title">REQUEST A QUOTE</h2>
+      <p class="modal-subtitle">Tell us about your project and we'll provide a tailored proposal at no cost.</p>
+      <div id="quote-form-wrap">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Full Name <span class="required">*</span></label><input type="text" class="form-input" id="q-name" placeholder="Full name"></div>
+          <div class="form-group"><label class="form-label">Email <span class="required">*</span></label><input type="email" class="form-input" id="q-email" placeholder="you@company.com"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Company <span class="required">*</span></label><input type="text" class="form-input" id="q-company" placeholder="Company name"></div>
+          <div class="form-group"><label class="form-label">Industry</label>
+            <select class="form-select" id="q-industry">
+              <option value="">Select industry...</option><option>Financial Services</option><option>Healthcare</option><option>Government</option><option>Technology</option><option>Retail</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="service-selector">
+          <div class="service-opt" onclick="toggleService(this)"><span class="svc-opt-icon">🤖</span>AI Engineering</div>
+          <div class="service-opt" onclick="toggleService(this)"><span class="svc-opt-icon">📊</span>Data Engineering</div>
+          <div class="service-opt" onclick="toggleService(this)"><span class="svc-opt-icon">🔐</span>Cybersecurity</div>
+        </div>
+        <div class="form-group"><label class="form-label">Monthly Budget (ZAR)</label>
+          <input type="range" class="budget-slider" id="q-budget" min="5000" max="500000" step="5000" value="50000" oninput="updateBudget()">
+          <div class="budget-display" id="budgetDisplay">R 50,000/mo</div>
+        </div>
+        <div class="form-group"><label class="form-label">Project Description <span class="required">*</span></label><textarea class="form-textarea" id="q-desc" placeholder="Describe your project..."></textarea></div>
+        <div class="form-check"><input type="checkbox" id="q-privacy"><label class="form-check-label" for="q-privacy">I agree to the <a href="#">Privacy Policy</a>. <span class="required">*</span></label></div>
+        <button class="btn-primary form-submit" onclick="submitForm('quote')">Submit Quote Request</button>
+      </div>
+      <div class="form-success" id="quote-success"><div class="success-icon">🎯</div><h3>QUOTE REQUEST SENT!</h3><p>We'll send a tailored proposal within 2–3 business days.</p></div>
+    </div>
+  </div>
+
+  <!-- PARTNERSHIP MODAL -->
+  <div class="modal-overlay" id="partnership-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('partnership-modal')">✕</button>
+      <span class="modal-eyebrow">Strategic Alliances</span>
+      <h2 class="modal-title">BECOME A PARTNER</h2>
+      <p class="modal-subtitle">We collaborate with technology vendors, system integrators, and consulting firms across Africa and globally.</p>
+      <div id="partnership-form-wrap">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Contact Name <span class="required">*</span></label><input type="text" class="form-input" id="p-name" placeholder="Full name"></div>
+          <div class="form-group"><label class="form-label">Company <span class="required">*</span></label><input type="text" class="form-input" id="p-company" placeholder="Organisation name"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Email <span class="required">*</span></label><input type="email" class="form-input" id="p-email" placeholder="you@company.com"></div>
+        <div class="form-group"><label class="form-label">Partnership Type <span class="required">*</span></label>
+          <select class="form-select" id="p-type">
+            <option value="">Select type...</option><option>Technology Vendor</option><option>System Integrator</option><option>Reseller / Referral</option><option>Cloud Provider Alliance</option><option>Joint Venture</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Partnership Proposal</label><textarea class="form-textarea" id="p-proposal" placeholder="Describe the partnership opportunity..."></textarea></div>
+        <div class="form-check"><input type="checkbox" id="p-privacy"><label class="form-check-label" for="p-privacy">I agree to the <a href="#">Privacy Policy</a>. <span class="required">*</span></label></div>
+        <button class="btn-gold form-submit" onclick="submitForm('partnership')">Submit Partnership Enquiry</button>
+      </div>
+      <div class="form-success" id="partnership-success"><div class="success-icon">🤝</div><h3>ENQUIRY RECEIVED!</h3><p>Our partnerships team will be in touch within 3–5 business days.</p></div>
+    </div>
+  </div>
+
+  <!-- CAREERS MODAL -->
+  <div class="modal-overlay" id="careers-modal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('careers-modal')">✕</button>
+      <span class="modal-eyebrow">Join the Team</span>
+      <h2 class="modal-title">CAREERS AT<br>TRISHIELD</h2>
+      <p class="modal-subtitle">We're building a world-class team. If you're passionate about AI, data, or cybersecurity — we want to hear from you.</p>
+      <div id="careers-form-wrap">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Full Name <span class="required">*</span></label><input type="text" class="form-input" id="j-name" placeholder="Your full name"></div>
+          <div class="form-group"><label class="form-label">Email <span class="required">*</span></label><input type="email" class="form-input" id="j-email" placeholder="you@email.com"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Role <span class="required">*</span></label>
+          <select class="form-select" id="j-role">
+            <option value="">Select a role...</option><option>AI / ML Engineer</option><option>Data Engineer</option><option>Data Scientist</option><option>Cybersecurity Analyst</option><option>Penetration Tester</option><option>Sales & Business Development</option><option>Project Manager</option><option>Graduate / Internship</option><option>Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label class="form-label">Cover Letter / Why Trishield?</label><textarea class="form-textarea" id="j-cover" placeholder="Tell us why you want to join Trishield..."></textarea></div>
+        <div class="form-group"><label class="form-label">Portfolio / CV Link</label><input type="url" class="form-input" id="j-portfolio" placeholder="Link to your work"><span class="input-hint">Or email directly to careers@trishield.co.za</span></div>
+        <div class="form-check"><input type="checkbox" id="j-privacy"><label class="form-check-label" for="j-privacy">I agree to the <a href="#">Privacy Policy</a>. <span class="required">*</span></label></div>
+        <button class="btn-primary form-submit" onclick="submitForm('careers')">Submit Application</button>
+      </div>
+      <div class="form-success" id="careers-success"><div class="success-icon">🎉</div><h3>APPLICATION SUBMITTED!</h3><p>We review all applications carefully and will reach out within 7–14 days.</p></div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span class="toast-icon" id="toast-icon">✅</span>
+    <div class="toast-title" id="toast-title">Success</div>
+    <div class="toast-msg" id="toast-msg">Your message has been sent.</div>
+  </div>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

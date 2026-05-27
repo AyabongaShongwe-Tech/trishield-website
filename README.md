@@ -1,4 +1,4 @@
-# 🛡️ Trishield Analytics & Security — Official Website
+#  Trishield Analytics & Security — Official Website
 
 > **Intelligence · Data · Security**
 
@@ -6,32 +6,32 @@ The official website for **Trishield Analytics and Security**, a South African t
 
 ---
 
-## 🌐 Live Site
+##  Live Site
 
 **[cosycrateco-tech.github.io/trishield-website](https://cosycrateco-tech.github.io/trishield-website/)**
 
 ---
 
-## ✨ Features
+##  Features
 
-### 🎬 Cinematic Opening Animation
+###  Cinematic Opening Animation
 - Digital rain & node network background
 - Shield SVG path-drawing sequence
 - Letter-by-letter company name reveal with stagger
 - Animated loader bar & corner brackets
 
-### 🌐 Three.js 3D Scenes
+###  Three.js 3D Scenes
 - **Hero** — Live animated particle network (180 nodes) reacting to mouse movement with glowing connection lines and subtle data-flow arcs
 - **Globe** — Rotating wireframe 3D globe with glowing location pins (SA, Kenya, Nigeria, UK) and arc connections
 - **Background** — Persistent particle canvas across the full site
 
-### 🃏 Interactive 3D Elements
+###  Interactive 3D Elements
 - **Flip Cards** — Service cards with CSS 3D rotateY flip on hover revealing full service details
 - **Tilt Cards** — Perspective tilt + dynamic shadow on service cards tracking mouse position
 - **Floating Stats** — 3D lift + rotate hover effect with animated count-up numbers
 - **Process Timeline** — Spring-physics slide-in cards with scroll trigger
 
-### 📄 Full Page Sections
+###  Full Page Sections
 | Section | Description |
 |---|---|
 | Hero | Full-screen 3D animated landing |
@@ -48,13 +48,13 @@ The official website for **Trishield Analytics and Security**, a South African t
 | Contact | CTA + 4 contact cards |
 | Newsletter | Email subscription strip |
 
-### 📬 Modal Forms
+###  Modal Forms
 - **Contact** — General enquiry form
 - **Quote** — Project scoping with budget slider & service selector
 - **Partnership** — Strategic alliance enquiry
 - **Careers** — Job application form
 
-### 🎨 Design Details
+###  Design Details
 - Custom animated cursor with ring follower
 - Scroll progress bar
 - Active nav link highlighting
@@ -67,7 +67,7 @@ The official website for **Trishield Analytics and Security**, a South African t
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Technology |
 |---|---|
@@ -79,7 +79,7 @@ The official website for **Trishield Analytics and Security**, a South African t
 
 ---
 
-## 📁 File Structure
+##  File Structure
 
 ```
 trishield-website/
@@ -91,7 +91,7 @@ trishield-website/
 
 ---
 
-## 🚀 Services Offered
+##  Services Offered
 
 ### AI Engineering
 Machine learning model development, NLP solutions, predictive analytics, and AI-powered automation tools.
@@ -104,7 +104,7 @@ Vulnerability assessments, penetration testing, POPIA compliance audits, managed
 
 ---
 
-## 💰 Pricing (ZAR)
+##  Pricing (ZAR)
 
 | Service | Range |
 |---|---|
@@ -120,7 +120,7 @@ Vulnerability assessments, penetration testing, POPIA compliance audits, managed
 
 ---
 
-## 📞 Contact
+##  Contact
 
 | Channel | Details |
 |---|---|
@@ -130,7 +130,7 @@ Vulnerability assessments, penetration testing, POPIA compliance audits, managed
 
 ---
 
-## 📄 Deployment
+##  Deployment
 
 To run locally:
 ```bash
@@ -149,7 +149,7 @@ const LOGO_SRC = "assets/your-logo.png"; // line 12
 
 ---
 
-## 🏢 About Trishield
+##  About Trishield
 
 **Trishield Analytics and Security** is a South African technology services company with a vision to become a trusted leader in intelligent analytics and cybersecurity across Africa and beyond.
 

@@ -613,7 +613,9 @@ function showToast(title, msg, type = 'success') {
   const t = document.getElementById('toast');
   document.getElementById('toast-title').textContent = title;
   document.getElementById('toast-msg').textContent   = msg;
-  document.getElementById('toast-icon').textContent  = type === 'success' ? '✅' : '❌';
+  document.getElementById('toast-icon').innerHTML = type === 'success'
+    ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12.5l2.5 2.5L16 9"/></svg>'
+    : '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v5M12 16h.01"/></svg>';
   t.className = 'toast' + (type === 'error' ? ' error' : '');
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 4500);

@@ -104,19 +104,17 @@ Vulnerability assessments, penetration testing, POPIA compliance audits, managed
 
 ---
 
-##  Pricing (ZAR)
+##  Pricing (ZAR, excl. VAT)
 
-| Service | Range |
-|---|---|
-| Starter Security Audit | R5,000 – R8,000 |
-| Vulnerability Assessment | R8,000 – R15,000 |
-| Penetration Testing | R15,000 – R35,000 |
-| POPIA Compliance Audit | R10,000 – R20,000 |
-| BI Dashboard | R15,000 – R30,000 |
-| Data Pipeline Setup | R25,000 – R50,000 |
-| AI Chatbot / Automation | R30,000 – R70,000 |
-| Custom ML Solution | R80,000 – R200,000+ |
-| Managed Security Retainer | R12,000 – R25,000/month |
+Full tiered pricing lives in the site's **Pricing** section (`#pricing`), with a tab per service line (Starter / Growth / Enterprise / Monthly Retainer).
+
+| Service Line | Starter | Growth | Enterprise | Retainer |
+|---|---|---|---|---|
+| Cybersecurity | R15,000 – R22,000 | R50,000 – R80,000 | R110,000 – R180,000 | R20,000 – R45,000/mo |
+| Data Analytics | R20,000 – R35,000 | R60,000 – R100,000 | R150,000 – R280,000 | R15,000 – R30,000/mo |
+| Data Engineering | R30,000 – R55,000 | R90,000 – R160,000 | R250,000 – R500,000 | R22,000 – R40,000/mo |
+| AI Engineering | R40,000 – R70,000 | R110,000 – R220,000 | R300,000 – R600,000 | R28,000 – R55,000/mo |
+| GRC (Governance, Risk & Compliance) | R40,000 – R70,000 | R100,000 – R200,000 | R250,000 – R500,000 | R30,000 – R80,000/mo |
 
 ---
 

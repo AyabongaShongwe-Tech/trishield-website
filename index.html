@@ -115,6 +115,7 @@
     </div>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
       <li><a href="#mission">About</a></li>
       <li><a href="#market">Markets</a></li>
       <li><a href="#team">Team</a></li>
@@ -129,6 +130,7 @@
   <!-- ===== MOBILE MENU ===== -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#services"  onclick="closeMobileMenu()">Services</a>
+    <a href="#pricing"   onclick="closeMobileMenu()">Pricing</a>
     <a href="#mission"   onclick="closeMobileMenu()">About</a>
     <a href="#market"    onclick="closeMobileMenu()">Markets</a>
     <a href="#team"      onclick="closeMobileMenu()">Team</a>
@@ -216,6 +218,180 @@
         </ul>
         <button class="svc-cta" onclick="openModal('quote-modal')">Enquire About Security →</button>
       </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===== PRICING ===== -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-header reveal">
+      <span class="section-label">Investment</span>
+      <h2 class="section-title">TRANSPARENT<br>PRICING</h2>
+      <p class="section-body" style="max-width:420px">Every engagement is scoped to the work required — from a single gap analysis to a fully managed programme. All prices exclude VAT.</p>
+    </div>
+
+    <div class="pricing-tabs reveal delay-1" id="pricingTabs" role="tablist">
+      <button class="price-tab active" data-tab="cyber" role="tab" aria-selected="true">Cybersecurity</button>
+      <button class="price-tab" data-tab="analytics" role="tab" aria-selected="false">Data Analytics</button>
+      <button class="price-tab" data-tab="engineering" role="tab" aria-selected="false">Data Engineering</button>
+      <button class="price-tab" data-tab="ai" role="tab" aria-selected="false">AI Engineering</button>
+      <span class="price-tab-indicator" id="priceTabIndicator"></span>
+    </div>
+
+    <div class="pricing-panels">
+
+      <!-- Cybersecurity -->
+      <div class="price-panel active" data-panel="cyber">
+        <div class="price-grid">
+          <div class="price-card tier-starter" data-tilt>
+            <span class="price-tier">Starter</span>
+            <p class="price-scope">POPIA gap analysis + written report</p>
+            <div class="price-amount">R15,000 <small>–</small> R22,000</div>
+          </div>
+          <div class="price-card tier-growth" data-tilt>
+            <span class="price-tier">Growth</span>
+            <p class="price-scope">Full security audit + external penetration test</p>
+            <div class="price-amount">R50,000 <small>–</small> R80,000</div>
+          </div>
+          <div class="price-card tier-enterprise" data-tilt>
+            <span class="price-tier">Enterprise</span>
+            <p class="price-scope">Full audit + internal &amp; external pen test + remediation plan + staff training</p>
+            <div class="price-amount">R110,000 <small>–</small> R180,000</div>
+          </div>
+          <div class="price-card tier-retainer" data-tilt>
+            <span class="price-tier">Monthly Retainer</span>
+            <p class="price-scope">Managed security services — monitoring, monthly report, incident response</p>
+            <div class="price-amount">R20,000 <small>–</small> R45,000<span class="price-suffix">/month</span></div>
+          </div>
+        </div>
+        <p class="price-certs"><strong>Team certifications:</strong> CompTIA Security+, CompTIA CySA+, CEH, CISSP, CISM, OSCP, ISO 27001 Lead Auditor</p>
+      </div>
+
+      <!-- Data Analytics -->
+      <div class="price-panel" data-panel="analytics">
+        <div class="price-grid">
+          <div class="price-card tier-starter" data-tilt>
+            <span class="price-tier">Starter</span>
+            <p class="price-scope">3–5 custom dashboards (Power BI / Tableau) + training</p>
+            <div class="price-amount">R20,000 <small>–</small> R35,000</div>
+          </div>
+          <div class="price-card tier-growth" data-tilt>
+            <span class="price-tier">Growth</span>
+            <p class="price-scope">Full BI solution — 10+ dashboards, data model, automated reports</p>
+            <div class="price-amount">R60,000 <small>–</small> R100,000</div>
+          </div>
+          <div class="price-card tier-enterprise" data-tilt>
+            <span class="price-tier">Enterprise</span>
+            <p class="price-scope">Enterprise BI platform + data warehouse + integrations</p>
+            <div class="price-amount">R150,000 <small>–</small> R280,000</div>
+          </div>
+          <div class="price-card tier-retainer" data-tilt>
+            <span class="price-tier">Monthly Retainer</span>
+            <p class="price-scope">Reporting, maintenance, and new dashboard development</p>
+            <div class="price-amount">R15,000 <small>–</small> R30,000<span class="price-suffix">/month</span></div>
+          </div>
+        </div>
+        <p class="price-certs"><strong>Team certifications:</strong> Microsoft PL-300 (DA Associate), Google Data Analytics, Tableau Certified, SAS Certified</p>
+      </div>
+
+      <!-- Data Engineering -->
+      <div class="price-panel" data-panel="engineering">
+        <div class="price-grid">
+          <div class="price-card tier-starter" data-tilt>
+            <span class="price-tier">Starter</span>
+            <p class="price-scope">ETL pipeline (2–3 sources) + documentation</p>
+            <div class="price-amount">R30,000 <small>–</small> R55,000</div>
+          </div>
+          <div class="price-card tier-growth" data-tilt>
+            <span class="price-tier">Growth</span>
+            <p class="price-scope">Data warehouse + 5–8 pipelines + orchestration</p>
+            <div class="price-amount">R90,000 <small>–</small> R160,000</div>
+          </div>
+          <div class="price-card tier-enterprise" data-tilt>
+            <span class="price-tier">Enterprise</span>
+            <p class="price-scope">Full modern data stack — Snowflake / BigQuery + Airflow + dbt</p>
+            <div class="price-amount">R250,000 <small>–</small> R500,000</div>
+          </div>
+          <div class="price-card tier-retainer" data-tilt>
+            <span class="price-tier">Monthly Retainer</span>
+            <p class="price-scope">DataOps support, monitoring, new pipeline development</p>
+            <div class="price-amount">R22,000 <small>–</small> R40,000<span class="price-suffix">/month</span></div>
+          </div>
+        </div>
+        <p class="price-certs"><strong>Team certifications:</strong> AWS Data Engineer Associate, Azure DP-203, GCP Professional Data Engineer, Databricks, SnowPro Core</p>
+      </div>
+
+      <!-- AI Engineering -->
+      <div class="price-panel" data-panel="ai">
+        <div class="price-grid">
+          <div class="price-card tier-starter" data-tilt>
+            <span class="price-tier">Starter</span>
+            <p class="price-scope">AI chatbot or document Q&amp;A tool for internal use</p>
+            <div class="price-amount">R40,000 <small>–</small> R70,000</div>
+          </div>
+          <div class="price-card tier-growth" data-tilt>
+            <span class="price-tier">Growth</span>
+            <p class="price-scope">Custom ML model + API + deployment</p>
+            <div class="price-amount">R110,000 <small>–</small> R220,000</div>
+          </div>
+          <div class="price-card tier-enterprise" data-tilt>
+            <span class="price-tier">Enterprise</span>
+            <p class="price-scope">Full AI solution — multiple models, MLOps, monitoring, retraining</p>
+            <div class="price-amount">R300,000 <small>–</small> R600,000</div>
+          </div>
+          <div class="price-card tier-retainer" data-tilt>
+            <span class="price-tier">Monthly Retainer</span>
+            <p class="price-scope">Model monitoring, retraining, and new feature development</p>
+            <div class="price-amount">R28,000 <small>–</small> R55,000<span class="price-suffix">/month</span></div>
+          </div>
+        </div>
+        <p class="price-certs"><strong>Team certifications:</strong> GCP Professional ML Engineer, AWS ML Specialty, Azure AI-102, TensorFlow Developer Certificate</p>
+      </div>
+
+    </div>
+
+    <!-- GRC Highlight -->
+    <div class="grc-highlight reveal delay-2">
+      <div class="grc-highlight-head">
+        <span class="grc-badge">Highest-Value Engagement</span>
+        <h3 class="grc-title">Governance, Risk &amp; Compliance</h3>
+        <p class="grc-desc">GRC sits above the technical work — it's the governance structure that keeps a company compliant, manages risk proactively, and aligns security decisions with business goals. Sold at board level against POPIA, King IV, ISO 27001, NIST, SARB and PCI-DSS.</p>
+      </div>
+      <div class="grc-grid">
+        <div class="price-card tier-starter" data-tilt>
+          <span class="price-tier">Starter</span>
+          <p class="price-scope">GRC Gap Assessment — one framework, written report + roadmap</p>
+          <div class="price-amount">R40,000 <small>–</small> R70,000</div>
+        </div>
+        <div class="price-card tier-growth" data-tilt>
+          <span class="price-tier">Growth</span>
+          <p class="price-scope">Full framework implementation — policy suite, risk register, board reporting</p>
+          <div class="price-amount">R100,000 <small>–</small> R200,000</div>
+        </div>
+        <div class="price-card tier-enterprise" data-tilt>
+          <span class="price-tier">Enterprise</span>
+          <p class="price-scope">Multi-framework programme — POPIA + ISO 27001 + King IV, quarterly board reports</p>
+          <div class="price-amount">R250,000 <small>–</small> R500,000</div>
+        </div>
+        <div class="price-card tier-retainer" data-tilt>
+          <span class="price-tier">Monthly Retainer</span>
+          <p class="price-scope">Ongoing advisory — risk review, compliance monitoring, policy updates</p>
+          <div class="price-amount">R30,000 <small>–</small> R80,000<span class="price-suffix">/month</span></div>
+        </div>
+      </div>
+      <p class="price-certs"><strong>Team certifications:</strong> CISA, CISM, CRISC, ISO 27001 Lead Auditor, ISC2 CGRC</p>
+
+      <div class="grc-chain">
+        <div class="grc-chain-step"><span class="grc-chain-name">POPIA Audit</span><span class="grc-chain-price">R15K–R22K</span></div>
+        <div class="grc-chain-arrow">→</div>
+        <div class="grc-chain-step"><span class="grc-chain-name">GRC Gap Assessment</span><span class="grc-chain-price">R40K–R70K</span></div>
+        <div class="grc-chain-arrow">→</div>
+        <div class="grc-chain-step"><span class="grc-chain-name">Pen Test + Hardening</span><span class="grc-chain-price">R50K–R80K</span></div>
+        <div class="grc-chain-arrow">→</div>
+        <div class="grc-chain-step is-retainer"><span class="grc-chain-name">GRC + Security Retainer</span><span class="grc-chain-price">R50K–R100K/mo</span></div>
+      </div>
+      <p class="grc-chain-caption">One client, four engagements — the natural upsell path from a single audit into a standing retainer.</p>
     </div>
   </section>
 

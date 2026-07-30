@@ -777,6 +777,55 @@ function initParallax() {
 }
 
 /* ============================================================
+   11. PRICING TABS
+   ============================================================ */
+function initPricingTabs() {
+  const tabs      = document.querySelectorAll('.price-tab');
+  const panels    = document.querySelectorAll('.price-panel');
+  const indicator = document.getElementById('priceTabIndicator');
+  if (!tabs.length || !indicator) return;
+
+  function placeIndicator(tab) {
+    indicator.style.left  = tab.offsetLeft + 'px';
+    indicator.style.width = tab.offsetWidth + 'px';
+  }
+
+  function replayEntrance(panel) {
+    // Restart the fadeUp animation on the panel's cards each time it's shown
+    panel.querySelectorAll('.price-card').forEach(card => {
+      card.style.animation = 'none';
+      void card.offsetWidth; // force reflow
+      card.style.animation = '';
+    });
+  }
+
+  const activeTab = document.querySelector('.price-tab.active') || tabs[0];
+  placeIndicator(activeTab);
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      if (tab.classList.contains('active')) return;
+      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      placeIndicator(tab);
+
+      const targetPanel = document.querySelector(`.price-panel[data-panel="${tab.dataset.tab}"]`);
+      panels.forEach(p => p.classList.remove('active'));
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+        replayEntrance(targetPanel);
+      }
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    const current = document.querySelector('.price-tab.active');
+    if (current) placeIndicator(current);
+  });
+}
+
+/* ============================================================
    BOOT — run everything after DOM ready
    ============================================================ */
 function startMainAnimations() {
@@ -788,6 +837,7 @@ function startMainAnimations() {
   initReveal();
   initCounters();
   initTilt();
+  initPricingTabs();
   initMobileMenu();
   initTechTags();
   initParallax();

@@ -31,100 +31,21 @@ function injectLogos() {
 }
 
 /* ============================================================
-   1. CINEMATIC INTRO / OPENING ANIMATION
+   1. LOADING OVERLAY
    ============================================================ */
 function runIntro() {
-  const overlay     = document.getElementById('intro-overlay');
-  const introCanvas = document.getElementById('intro-canvas');
+  const overlay = document.getElementById('intro-overlay');
   if (!overlay) { startMainAnimations(); return; }
 
   document.body.style.overflow = 'hidden';
 
-  // ---- INTRO CANVAS: Digital rain + node network ----
-  const ic = introCanvas.getContext('2d');
-  introCanvas.width  = window.innerWidth;
-  introCanvas.height = window.innerHeight;
-  const W = introCanvas.width, H = introCanvas.height;
-
-  // Node network in background
-  const nodes = Array.from({ length: 60 }, () => ({
-    x: Math.random() * W, y: Math.random() * H,
-    vx: (Math.random() - .5) * .4, vy: (Math.random() - .5) * .4,
-    r: Math.random() * 1.5 + .5, a: Math.random() * .3 + .05
-  }));
-
-  // Digital rain columns
-  const cols    = Math.floor(W / 20);
-  const drops   = Array.from({ length: cols }, () => Math.random() * -H);
-  const chars   = '01アイウエオカキクケコサシスセソタチツテトナニヌネノ';
-
-  let animId;
-  function drawIntro() {
-    // Fade trail
-    ic.fillStyle = 'rgba(2,10,18,0.18)';
-    ic.fillRect(0, 0, W, H);
-
-    // Digital rain
-    ic.font = '12px monospace';
-    drops.forEach((y, i) => {
-      const ch = chars[Math.floor(Math.random() * chars.length)];
-      const x  = i * 20;
-      // Bright head
-      ic.fillStyle = `rgba(58,176,226,${Math.random() * .15 + .05})`;
-      ic.fillText(ch, x, y);
-      drops[i] = y > H + Math.random() * 500 ? -20 : y + 14;
-    });
-
-    // Node connections
-    nodes.forEach((n, i) => {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > W) n.vx *= -1;
-      if (n.y < 0 || n.y > H) n.vy *= -1;
-      ic.beginPath();
-      ic.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ic.fillStyle = `rgba(58,176,226,${n.a})`;
-      ic.fill();
-      for (let j = i + 1; j < nodes.length; j++) {
-        const m = nodes[j];
-        const d = Math.hypot(n.x - m.x, n.y - m.y);
-        if (d < 130) {
-          ic.beginPath();
-          ic.moveTo(n.x, n.y); ic.lineTo(m.x, m.y);
-          ic.strokeStyle = `rgba(58,176,226,${.04 * (1 - d / 130)})`;
-          ic.lineWidth = .5;
-          ic.stroke();
-        }
-      }
-    });
-    animId = requestAnimationFrame(drawIntro);
-  }
-  drawIntro();
-
-  // ---- SVG animation sequence ----
-  const shield  = document.getElementById('ip-shield');
-  const fill    = document.getElementById('ip-fill');
-  const tLetter = document.getElementById('ip-t');
-  const l1      = document.getElementById('ip-l1');
-  const l2      = document.getElementById('ip-l2');
-  const dots    = ['ip-d1','ip-d2','ip-d3','ip-d4','ip-d5','ip-d6'].map(id => document.getElementById(id));
-  const divLine = document.getElementById('intro-divider-line');
-
-  // Staggered SVG draws
-  setTimeout(() => { if (shield)  { shield.style.strokeDashoffset  = '0'; } }, 900);
-  setTimeout(() => { if (fill)    { fill.classList.add('show'); } }, 1600);
-  setTimeout(() => { if (tLetter) { tLetter.classList.add('show'); } }, 1450);
-  setTimeout(() => { if (l1)      { l1.classList.add('draw'); } }, 1750);
-  setTimeout(() => { if (l2)      { l2.classList.add('draw'); } }, 1950);
-  dots.forEach((d, i) => setTimeout(() => { if (d) d.style.opacity = '1'; }, 1600 + i * 80));
-  setTimeout(() => { if (divLine) divLine.classList.add('expand'); }, 2500);
-
-  // ---- Dismiss ----
+  // Brief, simple loading screen — dismiss once the fade-in/progress
+  // sequence (handled in CSS) has had time to complete.
   setTimeout(() => {
-    cancelAnimationFrame(animId);
     overlay.classList.add('hidden');
     document.body.style.overflow = '';
     startMainAnimations();
-  }, 3800);
+  }, 1300);
 }
 
 /* ============================================================

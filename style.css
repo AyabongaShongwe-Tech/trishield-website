@@ -55,165 +55,58 @@ body { background: var(--paper); color: var(--ink); font-family: 'Barlow', sans-
 }
 
 /* ============================================================
-   INTRO ANIMATION OVERLAY
+   LOADING OVERLAY
    ============================================================ */
 #intro-overlay {
   position: fixed; inset: 0; z-index: 10000;
-  background: #020a12;
+  background: var(--paper);
   display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-  transition: opacity 1s cubic-bezier(.76,0,.24,1), visibility 1s;
+  transition: opacity .5s ease, visibility .5s;
 }
 #intro-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-#intro-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-
-/* Scan line */
-.intro-scan {
-  position: absolute; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(16,32,47,.14), transparent);
-  box-shadow: 0 0 20px rgba(16,32,47,.14);
-  top: -2px; animation: introScan 2.8s ease-in-out forwards;
-  animation-delay: .2s;
-}
-@keyframes introScan {
-  0%   { top: -2px; opacity: 0; }
-  5%   { opacity: 1; }
-  100% { top: 100%; opacity: .3; }
-}
-
-/* Corner brackets */
-.intro-corner {
-  position: absolute; width: 40px; height: 40px;
-  opacity: 0; animation: cornerFade .5s ease forwards;
-}
-.intro-corner.tl { top: 40px; left: 40px; border-top: 1px solid var(--electric); border-left: 1px solid var(--electric); animation-delay: .4s; }
-.intro-corner.tr { top: 40px; right: 40px; border-top: 1px solid var(--electric); border-right: 1px solid var(--electric); animation-delay: .5s; }
-.intro-corner.bl { bottom: 40px; left: 40px; border-bottom: 1px solid var(--electric); border-left: 1px solid var(--electric); animation-delay: .6s; }
-.intro-corner.br { bottom: 40px; right: 40px; border-bottom: 1px solid var(--electric); border-right: 1px solid var(--electric); animation-delay: .7s; }
-@keyframes cornerFade { to { opacity: .5; } }
-
-/* Center container */
 #intro-center {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column; align-items: center; gap: 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
 }
 
-/* Pulsing rings */
-.intro-ring {
-  position: absolute; top: 50%; left: 50%; border-radius: 50%;
-  border: 1px solid rgba(58,176,226,.15);
-  transform: translate(-50%,-50%) scale(0);
-  animation: ringExpand 3s ease-out forwards;
-}
-.intro-ring.r1 { width: 280px; height: 280px; animation-delay: .3s; }
-.intro-ring.r2 { width: 420px; height: 420px; animation-delay: .6s; border-color: rgba(58,176,226,.08); }
-.intro-ring.r3 { width: 580px; height: 580px; animation-delay: .9s; border-color: rgba(58,176,226,.04); }
-@keyframes ringExpand {
-  0%   { transform: translate(-50%,-50%) scale(0); opacity: 0; }
-  20%  { opacity: 1; }
-  100% { transform: translate(-50%,-50%) scale(1); opacity: .6; }
-}
-
-/* Shield mark */
 #intro-mark {
-  position: relative; z-index: 3;
-  opacity: 0; transform: scale(.6);
-  animation: markAppear .8s cubic-bezier(.34,1.56,.64,1) .8s forwards;
-  filter: drop-shadow(0 0 30px rgba(16,32,47,.14));
+  opacity: 0; transform: translateY(6px);
+  animation: introFade .5s ease forwards;
 }
-#intro-mark svg { width: 110px; height: 130px; }
-@keyframes markAppear {
-  to { opacity: 1; transform: scale(1); }
-}
+#intro-mark svg { width: 42px; height: 50px; }
 
-/* SVG elements */
-#ip-shield {
-  transition: stroke-dashoffset 1.2s cubic-bezier(.76,0,.24,1);
-}
-#ip-shield.draw { stroke-dashoffset: 0; }
-#ip-fill { transition: opacity .5s ease 1.6s; }
-#ip-fill.show { opacity: 1; }
-#ip-t { transition: opacity .6s ease 1.4s, transform .6s cubic-bezier(.34,1.56,.64,1) 1.4s; transform-origin: 60px 80px; transform: scale(0); }
-#ip-t.show { opacity: 1; transform: scale(1); }
-#ip-l1, #ip-l2 { transition: stroke-dashoffset .6s ease; }
-#ip-l1.draw { stroke-dashoffset: 0; transition-delay: 1.7s; }
-#ip-l2.draw { stroke-dashoffset: 0; transition-delay: 1.9s; }
-#ip-d1,#ip-d2,#ip-d3,#ip-d4,#ip-d5,#ip-d6 { transition: opacity .3s ease; }
-.ip-dot-show { opacity: 1 !important; }
-
-/* Word reveal */
 #intro-words {
-  position: relative; z-index: 3; text-align: center;
-  display: flex; flex-direction: column; align-items: center; gap: 6px;
-  opacity: 0; transform: translateY(16px);
-  animation: wordsRise .7s ease 1.6s forwards;
+  text-align: center;
+  opacity: 0; transform: translateY(6px);
+  animation: introFade .5s ease .12s forwards;
 }
-@keyframes wordsRise { to { opacity: 1; transform: translateY(0); } }
-
-#intro-word-tri, #intro-word-shield {
-  display: flex; gap: 0;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.8rem, 7vw, 5.5rem);
-  letter-spacing: .18em; line-height: 1;
+#intro-word-tri, #intro-word-shield { display: inline; }
+#intro-word-tri, #intro-word-shield, #intro-sub-text {
+  font-family: 'Barlow', sans-serif; font-weight: 700;
+  letter-spacing: .3em; color: var(--ink); font-size: 1.05rem;
 }
-#intro-word-tri span, #intro-word-shield span {
-  display: inline-block; opacity: 0; transform: translateY(-20px);
-  animation: letterDrop .4s ease forwards;
-  color: var(--ink);
-  text-shadow: 0 0 30px rgba(16,32,47,.14);
-}
-#intro-word-tri span:nth-child(1) { animation-delay: 1.7s; }
-#intro-word-tri span:nth-child(2) { animation-delay: 1.78s; }
-#intro-word-tri span:nth-child(3) { animation-delay: 1.86s; color: var(--electric); text-shadow: 0 0 20px rgba(16,32,47,.14); }
-#intro-word-shield span:nth-child(1) { animation-delay: 1.94s; color: var(--electric); text-shadow: 0 0 20px rgba(16,32,47,.14); }
-#intro-word-shield span:nth-child(2) { animation-delay: 2.02s; }
-#intro-word-shield span:nth-child(3) { animation-delay: 2.10s; }
-#intro-word-shield span:nth-child(4) { animation-delay: 2.18s; }
-#intro-word-shield span:nth-child(5) { animation-delay: 2.26s; }
-#intro-word-shield span:nth-child(6) { animation-delay: 2.34s; }
-@keyframes letterDrop { to { opacity: 1; transform: translateY(0); } }
-
-#intro-divider-line {
-  width: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--electric), transparent);
-  margin: 8px 0; transition: width 1s ease 2.5s;
-}
-#intro-divider-line.expand { width: 260px; }
-
+#intro-word-tri span, #intro-word-shield span { color: inherit; }
 #intro-sub-text {
-  font-size: clamp(.6rem, 1.2vw, .75rem); letter-spacing: .55em;
-  color: var(--steel); text-transform: uppercase;
-  opacity: 0; animation: fadeIn .6s ease 2.6s forwards;
+  display: block; font-weight: 500; font-size: .58rem; letter-spacing: .38em;
+  color: var(--steel); text-transform: uppercase; margin-top: 8px;
 }
-#intro-tagline-dots {
-  display: flex; align-items: center; gap: 12px; margin-top: 4px;
-  font-size: .58rem; letter-spacing: .4em; color: rgba(107,143,168,.7); text-transform: uppercase;
-  opacity: 0; animation: fadeIn .6s ease 2.8s forwards;
-}
-#intro-tagline-dots span:first-child, #intro-tagline-dots span:nth-child(3), #intro-tagline-dots span:nth-child(5) {
-  width: 4px; height: 4px; border-radius: 50%; background: var(--electric);
-  display: inline-block; flex-shrink: 0; box-shadow: 0 0 6px var(--electric);
-}
+
+@keyframes introFade { to { opacity: 1; transform: translateY(0); } }
 
 /* Loader bar */
 #intro-loader {
-  position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 10px; width: 240px;
-  opacity: 0; animation: fadeIn .4s ease .5s forwards;
+  display: flex; flex-direction: column; align-items: center; gap: 10px; width: 130px;
+  opacity: 0; animation: introFade .4s ease .2s forwards;
 }
 #intro-loader-track {
-  width: 100%; height: 1px; background: rgba(58,176,226,.12); overflow: hidden;
+  width: 100%; height: 1px; background: rgba(16,32,47,.1); overflow: hidden;
 }
 #intro-loader-fill {
-  height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--electric));
-  box-shadow: 0 0 8px var(--electric);
-  animation: loaderFill 3.2s cubic-bezier(.25,.46,.45,.94) .5s forwards;
+  height: 100%; width: 0%; background: var(--electric);
+  animation: loaderFill .9s cubic-bezier(.4,0,.2,1) .25s forwards;
 }
 @keyframes loaderFill { to { width: 100%; } }
-#intro-loader-text {
-  font-size: .5rem; letter-spacing: .55em; color: rgba(107,143,168,.5);
-  text-transform: uppercase;
-}
+#intro-loader-text { display: none; }
 
 /* ============================================================
    NAV

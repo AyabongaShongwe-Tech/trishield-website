@@ -274,16 +274,15 @@ nav.scrolled {
   opacity: 0; animation: fadeUp .9s .3s forwards;
 }
 .hero-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(3.8rem, 9.5vw, 9rem);
-  line-height: .88; color: var(--ink); letter-spacing: .04em;
+  font-family: 'Barlow', sans-serif; font-weight: 800;
+  font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+  line-height: 1.12; color: var(--ink); letter-spacing: -.01em;
   opacity: 0; animation: fadeUp .9s .55s forwards;
-  text-shadow: 0 0 60px rgba(58,176,226,.2);
 }
 .hero-title .accent { color: var(--electric); }
 .hero-sub {
   font-size: clamp(.84rem, 1.3vw, 1.02rem); color: var(--silver); font-weight: 300;
-  letter-spacing: .06em; max-width: 560px; margin: 24px auto 0; line-height: 1.85;
+  letter-spacing: .01em; max-width: 560px; margin: 24px auto 0; line-height: 1.85;
   opacity: 0; animation: fadeUp .9s .8s forwards;
 }
 .hero-actions {
@@ -965,7 +964,7 @@ footer { padding: 40px 60px; border-top: 1px solid rgba(26,111,168,.16); positio
 }
 
 @media (max-width: 600px) {
-  .hero-title { font-size: clamp(3rem, 14vw, 5rem); }
+  .hero-title { font-size: clamp(2.2rem, 9vw, 3rem); }
   .metrics { grid-template-columns: 1fr 1fr; padding: 28px 20px; }
   .metric-num { font-size: 2.4rem; }
   .contact-cards { grid-template-columns: 1fr 1fr; }

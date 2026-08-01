@@ -11,9 +11,10 @@
    when deploying with a real logo file)
    ============================================================ */
 const LOGO_SRC = ""; // Replace with your actual logo path e.g. "assets/logo.png"
-// If no logo file, the shield SVG in the intro will serve as the brand mark
+// Nav logo is set directly in the HTML (assets/logo-mark.png).
+// If no logo file for the other placements, the text fallback below is used.
 function injectLogos() {
-  const els = ['navLogoImg','missionLogoImg','footerLogoImg'];
+  const els = ['missionLogoImg','footerLogoImg'];
   els.forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;

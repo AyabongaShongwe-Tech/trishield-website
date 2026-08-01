@@ -124,7 +124,8 @@ nav.scrolled {
   border-bottom: 1px solid var(--line);
   box-shadow: 0 4px 18px rgba(16,32,47,.05);
 }
-.nav-logo img { height: 48px; width: auto; }
+.nav-logo { display: flex; align-items: center; }
+.nav-logo img { height: 42px; width: auto; display: block; }
 .nav-links { display: flex; gap: 34px; list-style: none; }
 .nav-links a {
   color: var(--steel); text-decoration: none; font-size: .7rem;

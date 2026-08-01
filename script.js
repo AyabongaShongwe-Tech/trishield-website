@@ -123,7 +123,7 @@ function initHeroThreeJS() {
   nodeGeo.setAttribute('position', new THREE.BufferAttribute(nodePosArr, 3));
 
   const nodeMat = new THREE.PointsMaterial({
-    color: 0x3ab0e2, size: .8, transparent: true, opacity: .7,
+    color: 0x2d6d94, size: .8, transparent: true, opacity: .5,
     blending: THREE.AdditiveBlending, depthWrite: false
   });
   scene.add(new THREE.Points(nodeGeo, nodeMat));
@@ -134,7 +134,7 @@ function initHeroThreeJS() {
   const lineGeo = new THREE.BufferGeometry();
   lineGeo.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
   const lineMat = new THREE.LineSegments(lineGeo, new THREE.LineBasicMaterial({
-    color: 0x3ab0e2, transparent: true, opacity: .15,
+    color: 0x2d6d94, transparent: true, opacity: .12,
     blending: THREE.AdditiveBlending, depthWrite: false
   }));
   scene.add(lineMat);
@@ -167,7 +167,7 @@ function initHeroThreeJS() {
       const curve = new THREE.CatmullRomCurve3(points);
       const geo   = new THREE.TubeGeometry(curve, 40, .12, 4, false);
       const mat   = new THREE.MeshBasicMaterial({
-        color: 0x3ab0e2, transparent: true, opacity: .4,
+        color: 0x2d6d94, transparent: true, opacity: .28,
         blending: THREE.AdditiveBlending, depthWrite: false
       });
       const mesh = new THREE.Mesh(geo, mat);

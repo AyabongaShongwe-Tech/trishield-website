@@ -217,7 +217,7 @@ section, .metrics, .tech, .newsletter, footer {
 }
 
 /* Smoother card interactions */
-.service-card, .market-card, .team-card, .contact-card, .stat3d-card, .process-card, .flip-card-wrap {
+.service-card, .market-card, .team-card, .contact-card, .commit-card, .eng-step, .process-card, .flip-card-wrap {
   transition: transform .4s cubic-bezier(.25,.46,.45,.94),
               box-shadow .4s cubic-bezier(.25,.46,.45,.94),
               border-color .3s ease,
@@ -441,31 +441,20 @@ section { position: relative; z-index: 1; }
 /* ============================================================
    3D STATS SECTION
    ============================================================ */
-.stats3d-section { padding: 110px 60px; background: rgba(16,32,47,.05); }
-.stats3d-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
-.stat3d-card {
-  background: rgba(255,255,255,0.92); border: 1px solid rgba(26,111,168,.2);
-  padding: 48px 32px; text-align: center; position: relative; overflow: hidden;
-  transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s, border-color .4s;
-  transform-style: preserve-3d; cursor: none;
+.commitments-section { padding: 110px 60px; background: rgba(16,32,47,.03); }
+.commitments-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 18px; }
+.commit-card {
+  background: var(--card); border: 1px solid var(--line); border-top: 2px solid var(--electric);
+  padding: 30px 22px; cursor: none;
+  transition: transform .35s cubic-bezier(.25,.46,.45,.94), box-shadow .35s, border-color .35s;
 }
-.stat3d-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center top, rgba(58,176,226,.06), transparent 70%);
-  pointer-events: none;
+.commit-card:hover { transform: translateY(-4px); box-shadow: 0 14px 30px rgba(16,32,47,.1); border-color: rgba(28,110,163,.3); }
+.commit-num {
+  display: block; font-family: 'Barlow', sans-serif; font-weight: 800; font-size: 1.4rem;
+  color: rgba(16,32,47,.14); margin-bottom: 12px;
 }
-.stat3d-card:hover {
-  transform: translateY(-12px) rotateX(5deg) scale(1.02);
-  box-shadow: 0 18px 36px rgba(16,32,47,.12);
-  border-color: rgba(58,176,226,.4);
-}
-.stat3d-num {
-  font-family: 'Bebas Neue', sans-serif; font-size: 4.5rem; color: var(--electric);
-  line-height: 1; display: inline;
-  text-shadow: 0 0 30px rgba(16,32,47,.14);
-}
-.stat3d-unit { display: inline; font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--steel); }
-.stat3d-label { font-size: .68rem; letter-spacing: .25em; color: var(--steel); text-transform: uppercase; margin-top: 12px; display: block; }
+.commit-title { font-family: 'Barlow', sans-serif; font-weight: 700; font-size: .96rem; color: var(--ink); margin-bottom: 10px; }
+.commit-desc { font-size: .76rem; line-height: 1.65; color: var(--silver); font-weight: 300; }
 
 /* ============================================================
    TEAM
@@ -775,14 +764,14 @@ footer { padding: 40px 60px; border-top: 1px solid rgba(26,111,168,.16); positio
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
   .services, .mission, .market, .revenue, .tech, .team, .risk,
-  .cta-section, .newsletter, .globe-section, .stats3d-section,
-  .process-section, .flip-section { padding: 80px 24px; }
+  .cta-section, .newsletter, .globe-section, .commitments-section,
+  .process-section, .flip-section, .engagement { padding: 80px 24px; }
   .metrics, .contact-cards, .footer-top { grid-template-columns: 1fr 1fr; }
   .team-grid { grid-template-columns: repeat(3,1fr); }
   .mission, .globe-section { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .services-grid, .market-grid, .risk-grid, .revenue-inner { grid-template-columns: 1fr; }
-  .stats3d-grid { grid-template-columns: repeat(2,1fr); }
+  .commitments-grid { grid-template-columns: repeat(2,1fr); }
   .flip-grid { grid-template-columns: 1fr 1fr; }
   #globe-canvas { width: 300px; height: 300px; }
   .services-header { flex-direction: column; gap: 24px; align-items: flex-start; }
@@ -798,7 +787,7 @@ footer { padding: 40px 60px; border-top: 1px solid rgba(26,111,168,.16); positio
   .footer-top { grid-template-columns: 1fr; }
   .flip-grid { grid-template-columns: 1fr; }
   .flip-card-wrap { height: 320px; }
-  .stats3d-grid { grid-template-columns: 1fr 1fr; }
+  .commitments-grid { grid-template-columns: 1fr; }
   .hero-actions { flex-direction: column; align-items: center; }
   .hero-actions .btn-primary, .hero-actions .btn-outline, .hero-actions .btn-gold { width: 260px; text-align: center; }
   .modal { padding: 36px 24px; }
